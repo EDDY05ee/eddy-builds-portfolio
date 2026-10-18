@@ -1,779 +1,449 @@
-/* ============================================================
-   EDDY BUILDS — INTERACTIVE PORTFOLIO ENGINE
-   Vanilla JavaScript | Accessible | Responsive | No libraries
-   ============================================================ */
+(() => {
+  "use strict";
 
-"use strict";
+  // EDDY BUILDS — interactive portfolio
+  // Project status and limitations are described honestly.
 
-/* ------------------------------------------------------------
-   01. PROJECT CONTENT
-   Keep every project description honest about its current stage.
-   ------------------------------------------------------------ */
+  const PROJECTS = {
+    legacysense: {
+      title: "LegacySense AI",
+      category: "Industrial AI & energy intelligence",
+      stage: "Presentation and UI/dashboard mockup",
+      accent: "#58e6ff",
+      subtitle: "Energy intelligence designed for legacy manufacturing environments.",
+      problem: "Smaller and legacy manufacturing environments may have limited visibility into how equipment and operating patterns contribute to energy use. The concept explores how understandable data views could help teams investigate opportunities.",
+      affected: ["Small and medium-sized manufacturers", "Plant and maintenance teams", "Energy and operations managers"],
+      causes: ["Older equipment may not expose modern telemetry by default.", "Energy data can be fragmented across meters, logs and manual readings.", "Specialist analytics tools may be costly or difficult to adopt."],
+      existing: ["Manual readings and spreadsheets are accessible but time-consuming.", "Industrial monitoring platforms vary in cost and integration.", "A dashboard alone does not guarantee accurate recommendations."],
+      why: "Energy efficiency can affect operating costs and environmental impact. A useful tool must fit the data quality, budget and workflow of the site.",
+      idea: "A proposed energy-intelligence workspace for organising readings, displaying trends and helping people investigate possible inefficiencies.",
+      outcomes: ["Clearer energy-data visualisation", "Earlier visibility of unusual patterns for human review", "A starting point for site-specific efficiency investigations"],
+      advantages: ["Designed around legacy-site constraints", "Understandable visual summaries", "Potential to work with existing data sources"],
+      implementation: "Presentation and dashboard/UI mockup",
+      workflow: [["Collect", "Import readings or sample data"], ["Organise", "Clean and structure data"], ["Explore", "Visualise trends and anomalies"], ["Review", "A person investigates possible causes"]],
+      tech: ["Python (proposed)", "Pandas / NumPy (proposed)", "Streamlit (proposed)", "Plotly (proposed)", "SQLite (proposed)"],
+      next: "Build a clearly labelled demo using synthetic or openly available sample data, document assumptions and validate findings with domain experts.",
+      limitation: "No real factory deployment, validated AI model, measured energy savings or industrial validation is claimed. Any savings examples must be labelled illustrative."
+    },
 
-const PROJECTS = {
-  "legacysense": {
-    number: "01",
-    name: "LegacySense AI",
-    category: "INDUSTRIAL AI / ENERGY INTELLIGENCE",
-    status: "Presentation + UI/dashboard mockup",
-    statusType: "status-mockup",
-    accent: "#65e5ff",
-    accentRgb: "101, 229, 255",
-    symbol: "LS",
-    tagline: "Making Energy Use Make Sense.",
-    description:
-      "Production-aware energy intelligence for legacy SME manufacturing. The concept explores how energy consumption can be compared with production output to help engineers investigate unusual energy intensity.",
-    problem:
-      "Manufacturers may have energy readings and production records without an affordable, unified way to understand whether energy use is reasonable for the work completed.",
-    approach:
-      "The proposed workflow combines energy, production and machine-state data; establishes an expected energy baseline; flags deviations; and presents contextual explanations for an engineer to review.",
-    technology:
-      "Proposed stack: Python, Pandas, NumPy, machine-learning models, Streamlit, Plotly and SQLite. These are proposed technologies, not a claim that every component has been implemented.",
-    impact:
-      "The intended outcome is better visibility into energy performance and more informed investigations. Any energy savings must be measured against real production data; no real-world savings are claimed.",
-    next:
-      "Build a working data pipeline, validate the baseline against representative production data, test anomaly detection and document measurable evaluation results.",
-    disclaimer:
-      "Current stage: presentation and UI/dashboard mockup. The AI pipeline, industrial validation and energy savings have not been verified as implemented outcomes."
-  },
+    arogyaedge: {
+      title: "ArogyaEdge",
+      category: "Offline-first healthcare assistance",
+      stage: "Concept",
+      accent: "#5af0cf",
+      subtitle: "A concept for practical clinical assistance in resource-limited care settings.",
+      problem: "Healthcare workers may face time pressure, unreliable connectivity and repetitive documentation. Digital assistance must fit clinical workflows without replacing professional judgement.",
+      affected: ["Primary healthcare workers", "Patients in connectivity-constrained settings", "Clinic administrators"],
+      causes: ["Connectivity can vary by location.", "Documentation may take time away from patient-facing work.", "Information can be fragmented across tools."],
+      existing: ["Paper workflows work offline but can be hard to search.", "Cloud tools can depend on connectivity and privacy controls.", "General AI assistants are not automatically clinically safe."],
+      why: "Useful clinical technology must prioritise privacy, human oversight, safety and local validation.",
+      idea: "An offline-first workspace concept for assisting with clinical documentation and local information access. Qualified healthcare professionals would review generated notes or suggestions before use.",
+      outcomes: ["A clearer local workflow concept", "A basis for usability testing", "A way to explore privacy and safety requirements"],
+      advantages: ["Offline-first design goal", "Privacy-conscious local processing direction", "Human review remains central"],
+      implementation: "Healthcare technology concept",
+      workflow: [["Capture", "Enter or dictate information"], ["Organise", "Prepare a structured draft locally"], ["Review", "A clinician checks the content"], ["Use safely", "Save or share approved information"]],
+      tech: ["Local processing (proposed)", "Speech-to-text (proposed)", "Structured templates (proposed)", "Safety rules (proposed)"],
+      next: "Define one narrow, non-diagnostic workflow, use fictional data and review safety and privacy requirements with qualified healthcare professionals.",
+      limitation: "No clinical deployment, medical validation, autonomous diagnosis or improved patient outcomes are claimed."
+    },
 
-  "arogyaedge": {
-    number: "02",
-    name: "ArogyaEdge",
-    category: "HEALTHCARE AI / EDGE COMPUTING",
-    status: "Concept",
-    statusType: "status-concept",
-    accent: "#62e5c3",
-    accentRgb: "98, 229, 195",
-    symbol: "AE",
-    tagline: "Clinical assistance designed for constrained environments.",
-    description:
-      "An offline-first healthcare technology concept for resource-limited primary healthcare settings, where dependable local tools may be valuable when connectivity is limited.",
-    problem:
-      "Connectivity limitations, repetitive documentation and fragmented workflows can make digital assistance difficult to use consistently in under-resourced clinical environments.",
-    approach:
-      "The proposed direction explores local speech-to-text, structured clinical documentation, understandable guidance and privacy-conscious on-device processing, with clinicians retaining decision authority.",
-    technology:
-      "Potential directions include local language models, speech recognition, structured data processing and deterministic safety checks. The final implementation stack remains to be confirmed.",
-    impact:
-      "The goal is to explore practical digital assistance that remains useful when internet access is unreliable. Clinical safety, language accuracy and usability would require rigorous evaluation.",
-    next:
-      "Define the smallest safe workflow, create a test dataset, prototype offline operation and evaluate transcription accuracy with appropriate privacy safeguards.",
-    disclaimer:
-      "This is presented as a concept until a working implementation and its capabilities are verified. It is not a replacement for qualified clinical judgment."
-  },
+    roadguard: {
+      title: "RoadGuard AI",
+      category: "Road safety / computer vision",
+      stage: "Prototype development",
+      accent: "#ffca7a",
+      subtitle: "A road-safety prototype exploring earlier awareness of possible risks.",
+      problem: "Road users and safety teams can benefit from timely hazard awareness, but detecting risk reliably from visual input is technically difficult and context-dependent.",
+      affected: ["Drivers and other road users", "Road-safety teams", "Communities affected by unsafe road conditions"],
+      causes: ["Hazards appear quickly and visibility changes with weather and lighting.", "Video detection can miss objects or produce false alerts.", "A prototype may not represent real-world conditions."],
+      existing: ["Road signs and safe road design remain fundamental.", "Vehicle assistance systems vary by vehicle and context.", "Manual reporting may not be immediate."],
+      why: "Road safety directly affects people. Missed detections and false alarms both need careful evaluation.",
+      idea: "A computer-vision-assisted road-safety interface exploring whether selected visual events can be flagged for human attention.",
+      outcomes: ["A limited demonstrable interface", "Documented supported and unsupported cases", "A path toward measured evaluation"],
+      advantages: ["Focused road-safety problem", "Prototype-friendly scope", "Clear evaluation criteria can be documented"],
+      implementation: "Software prototype / innovation project",
+      workflow: [["Input", "Use a permitted test image or clip"], ["Analyse", "Run a selected model or rule"], ["Flag", "Display candidate events"], ["Evaluate", "Compare against labelled examples"]],
+      tech: ["Python (prototype direction)", "Computer vision (exploratory)", "Streamlit (possible UI)", "Test clips and labelled data"],
+      next: "Stabilise the demo, document its exact detection scope and measure false positives and false negatives on suitable samples.",
+      limitation: "This is not a certified safety system. It must not replace attentive driving, official road-safety procedures or validated equipment."
+    },
 
-  "roadguard": {
-    number: "03",
-    name: "RoadGuard AI",
-    category: "ROAD SAFETY / COMPUTER VISION",
-    status: "Prototype development",
-    statusType: "status-progress",
-    accent: "#ffbd79",
-    accentRgb: "255, 189, 121",
-    symbol: "RG",
-    tagline: "Exploring intelligent tools for safer roads.",
-    description:
-      "A road-safety project exploring how AI-assisted analysis could support the identification of road risks and help make safety information easier to interpret.",
-    problem:
-      "Road-safety monitoring can involve multiple observations and changing conditions. Turning those observations into useful, timely information is a practical engineering challenge.",
-    approach:
-      "The project direction explores a demonstrable software prototype for a defined road-safety use case. Its final supported detection features and evaluation results must be established through testing.",
-    technology:
-      "Python and a web-based prototype are the starting direction. Specific computer-vision models, datasets and dependencies should be documented only after they are confirmed in the actual code.",
-    impact:
-      "The intended impact is to explore how software could support road-safety awareness. A prototype alone does not demonstrate reduced accidents or proven real-world detection accuracy.",
-    next:
-      "Resolve current application errors, define one testable use case, validate the output on suitable sample data and document false positives and limitations.",
-    disclaimer:
-      "Prototype development is ongoing. Do not interpret the visual concept or project name as evidence of validated real-world road monitoring."
-  },
+    fixtrack: {
+      title: "FixTrack",
+      category: "Campus workflow software",
+      stage: "Academic project in development",
+      accent: "#b18cff",
+      subtitle: "A complaint-tracking system for more visible campus issue handling.",
+      problem: "When campus issues are reported informally, students may not know whether a concern was received, assigned or resolved.",
+      affected: ["Students reporting issues", "Staff handling complaints", "Administrators monitoring recurring problems"],
+      causes: ["Reports can be spread across messages and conversations.", "Ownership and status may not be visible.", "Duplicate reports can complicate follow-up."],
+      existing: ["Verbal reporting leaves limited shared history.", "Messaging groups can bury updates.", "Generic ticketing tools may need campus-specific adaptation."],
+      why: "A transparent reporting process can improve accountability and make the next step easier to understand.",
+      idea: "An academic complaint-tracking system being developed around a Java/XAMPP-style workflow to record complaint IDs, categories, priorities, status and dates.",
+      outcomes: ["A central complaint record", "More visible status changes", "Practice with database-backed workflows"],
+      advantages: ["Clear complaint fields", "Prioritisation and follow-up", "Useful CRUD and database learning"],
+      implementation: "Academic software project in development",
+      workflow: [["Report", "Submit an issue"], ["Record", "Store complaint details"], ["Track", "Update status"], ["Review", "Follow up on the issue"]],
+      tech: ["Java", "XAMPP (development environment)", "Database integration", "HTML / CSS / JavaScript as applicable"],
+      next: "Finish and test database operations, resolve complaint-ID and status-update bugs, and validate input handling.",
+      limitation: "The project is still in development. Full functionality, security, deployment and successful resolution of all reported issues are not claimed."
+    },
 
-  "fixtrack": {
-    number: "04",
-    name: "FixTrack",
-    category: "FULL-STACK DEVELOPMENT / CAMPUS SERVICES",
-    status: "Academic project in development",
-    statusType: "status-progress",
-    accent: "#b69aff",
-    accentRgb: "182, 154, 255",
-    symbol: "FT",
-    tagline: "A clearer path from complaint to resolution.",
-    description:
-      "An academic complaint-tracking application concept designed to organise reported campus issues and make their status easier to follow.",
-    problem:
-      "When issue reports are spread across informal channels, keeping track of complaint details, priority and progress can become difficult.",
-    approach:
-      "The project explores structured complaint records, categories, priorities, status tracking and a database-backed interface for organising requests.",
-    technology:
-      "Java, XAMPP and a database-backed workflow have been explored during development. The exact working features should be confirmed against the current project files.",
-    impact:
-      "The objective is to make complaint handling more organised and traceable. Any claims about time saved or improved resolution rates require real measurements.",
-    next:
-      "Verify database persistence, fix record-ID and status-update issues, validate input handling and test the complete workflow from submission to resolution.",
-    disclaimer:
-      "This is an academic project in development. Only verified, working features should be described as implemented."
-  },
+    ayurqc: {
+      title: "AyurQC AI",
+      category: "AI-assisted quality screening",
+      stage: "Idea stage",
+      accent: "#5af0cf",
+      subtitle: "Exploring ways to flag unusual Ayurvedic raw-material batches for further review.",
+      problem: "Raw materials may vary in appearance and quality. Identifying suspicious variation can require suitable testing, documented procedures and qualified assessment.",
+      affected: ["Raw-material quality teams", "Researchers and laboratories", "Suppliers and manufacturers"],
+      causes: ["Natural materials vary between batches.", "Visual differences do not establish chemical composition.", "Reference data and reliable labels may be limited."],
+      existing: ["Visual inspection can identify obvious differences but has limitations.", "Laboratory methods can measure specific properties.", "Supplier records support traceability but do not independently prove quality."],
+      why: "Quality assessment matters, but screening tools must not overstate what an image or model can determine.",
+      idea: "An exploratory AI-assisted screening concept to flag unusual batches for qualified human review and appropriate laboratory testing.",
+      outcomes: ["A defined screening workflow", "A way to explore labelled reference data", "A documented process for human review"],
+      advantages: ["Focused screening use case", "Can highlight uncertainty", "Laboratory testing remains essential"],
+      implementation: "Early-stage concept",
+      workflow: [["Collect", "Obtain authorised sample data"], ["Compare", "Explore documented features"], ["Flag", "Identify unusual examples"], ["Verify", "Refer for qualified assessment"]],
+      tech: ["Image analysis (exploratory)", "Reference datasets (needed)", "Model evaluation (future work)", "Laboratory verification"],
+      next: "Define one material and one measurable screening task, obtain suitable verified data and consult qualified quality and laboratory experts.",
+      limitation: "The concept cannot prove authenticity, purity, adulteration or medicinal safety. Laboratory testing and qualified human assessment remain essential."
+    },
 
-  "ayurqc": {
-    number: "05",
-    name: "AyurQC AI",
-    category: "AI FOR AYURVEDA / QUALITY SCREENING",
-    status: "Idea stage",
-    statusType: "status-idea",
-    accent: "#a8d878",
-    accentRgb: "168, 216, 120",
-    symbol: "AQ",
-    tagline: "Intelligent screening for Ayurvedic raw materials.",
-    description:
-      "An AI-assisted screening concept exploring how unusual patterns in Ayurvedic medicinal raw-material batches could help identify samples that may deserve additional laboratory investigation.",
-    problem:
-      "Raw-material quality assessment can involve laboratory work and multiple measurements. Exploring additional screening tools may help organise observations and prioritise further investigation.",
-    approach:
-      "Potential approaches include analysing images, reviewing available physical or laboratory measurements and flagging unusual patterns for qualified human review.",
-    technology:
-      "Possible future directions include computer vision, tabular-data analysis, anomaly detection and a review dashboard. No model, dataset or testing result is claimed as implemented.",
-    impact:
-      "The intended contribution is to explore whether AI-assisted screening can support quality-control workflows and laboratory prioritisation.",
-    next:
-      "Consult qualified Ayurveda and quality-control experts, identify a defensible dataset, establish laboratory reference methods and define a safe evaluation protocol.",
-    disclaimer:
-      "Idea stage only. An AI flag cannot prove adulteration, authenticity, purity or medicinal safety. Laboratory testing and qualified human assessment remain essential."
-  },
+    unicampus: {
+      title: "UniCampus",
+      category: "Education technology / campus systems",
+      stage: "Platform concept",
+      accent: "#8ca5ff",
+      subtitle: "A unified campus platform concept connecting academic workflows and student support.",
+      problem: "Academic information, attendance, resources and student support can be distributed across different tools, making it difficult to find the right information in one place.",
+      affected: ["Students", "Faculty members", "College administrators"],
+      causes: ["Different workflows may use separate systems.", "Updates can be difficult to discover.", "Access rights and privacy requirements vary by role."],
+      existing: ["Learning-management systems support selected academic tasks.", "Spreadsheets can be flexible but require manual maintenance.", "Separate tools may create fragmented experiences."],
+      why: "A well-designed campus platform could improve access to information while respecting privacy and institutional responsibilities.",
+      idea: "A platform concept bringing together academic resources, attendance records, performance views, notifications and student-support workflows with role-based access.",
+      outcomes: ["A clearer campus information architecture", "Role-specific views", "A foundation for testing student and faculty workflows"],
+      advantages: ["Unified experience concept", "Role-based design direction", "Privacy and consent can be considered from the beginning"],
+      implementation: "Platform concept; implementation status not verified",
+      workflow: [["Sign in", "Access an authorised account"], ["Find", "View relevant campus information"], ["Act", "Use the appropriate workflow"], ["Review", "Receive permitted updates"]],
+      tech: ["Web application (proposed)", "Role-based access (proposed)", "Database (proposed)", "Audit and consent controls (proposed)"],
+      next: "Choose one initial workflow, define user roles and permissions, build a small prototype and test it with appropriate permission.",
+      limitation: "A complete operational campus platform, institutional integration and verified security are not claimed."
+    },
 
-  "unicampus": {
-    number: "06",
-    name: "UniCampus",
-    category: "EDTECH / CAMPUS SOFTWARE",
-    status: "Platform concept",
-    statusType: "status-concept",
-    accent: "#91a9ff",
-    accentRgb: "145, 169, 255",
-    symbol: "UC",
-    tagline: "A more connected campus experience.",
-    description:
-      "A unified campus-platform concept exploring how students, faculty and administrators could access relevant academic information and campus workflows in one place.",
-    problem:
-      "Academic information, attendance, learning resources and campus communication can be distributed across different tools and processes.",
-    approach:
-      "The concept brings together role-based experiences for students, faculty and administrators, with attention to permissions, privacy and practical classroom workflows.",
-    technology:
-      "Potential components include a web application, role-based access controls, a database and personalised study support. Implementation details remain to be confirmed.",
-    impact:
-      "The goal is to investigate a more coherent campus experience without introducing unnecessary surveillance or replacing educator judgment.",
-    next:
-      "Choose one high-value workflow, validate its requirements with stakeholders, design a small prototype and define privacy and access-control tests.",
-    disclaimer:
-      "Platform concept. Do not assume integrations, authentication, attendance tracking or personalised AI features are operational."
-  },
+    continuity: {
+      title: "Continuity AI",
+      category: "Healthcare continuity",
+      stage: "Concept",
+      accent: "#58e6ff",
+      subtitle: "A concept for helping authorised care teams and patients maintain care context.",
+      problem: "When care moves between appointments, providers or locations, relevant history and follow-up information can be difficult to organise and share appropriately.",
+      affected: ["Patients and caregivers", "Healthcare professionals", "Care teams involved in handovers"],
+      causes: ["Records may be stored in separate systems.", "Patients may need to repeat their history.", "Sharing health information requires consent and appropriate access controls."],
+      existing: ["Patient-held documents can help but may be incomplete.", "Electronic records vary between providers.", "Messaging alone may lack reliable structure and access governance."],
+      why: "Continuity of care requires understandable information, appropriate access and clear responsibility for clinical decisions.",
+      idea: "A healthcare continuity concept for organising patient-approved information and follow-up context for authorised people.",
+      outcomes: ["A clearer handover workflow", "Structured summaries with source labels", "A basis for exploring consent-aware sharing"],
+      advantages: ["Patient-centred information flow", "Consent-aware design direction", "Can highlight missing context instead of inventing it"],
+      implementation: "Healthcare product concept",
+      workflow: [["Choose", "Select information to share"], ["Organise", "Structure records with source labels"], ["Authorise", "Limit access to approved people"], ["Review", "Care teams verify context"]],
+      tech: ["Consent-aware sharing (proposed)", "Structured summaries", "Access controls (proposed)", "Audit history (proposed)"],
+      next: "Map a single handover scenario, define consent and revocation requirements, use fictional data and seek expert feedback.",
+      limitation: "No live patient-record integration, clinical validation or healthcare-provider deployment is claimed. Real use would require strong security, consent, governance and clinical review."
+    }
+  };
 
-  "continuity": {
-    number: "07",
-    name: "Continuity AI",
-    category: "HEALTHCARE / INFORMATION CONTINUITY",
-    status: "Concept",
-    statusType: "status-concept",
-    accent: "#70c9ff",
-    accentRgb: "112, 201, 255",
-    symbol: "CA",
-    tagline: "Helping care information stay connected.",
-    description:
-      "A healthcare continuity concept focused on exploring how patient-authorised information could remain organised and accessible across appointments, care transitions and follow-up.",
-    problem:
-      "When relevant medical information is scattered across records and providers, patients and authorised care teams may face difficulties maintaining continuity.",
-    approach:
-      "The proposed direction explores organised medical histories, patient-controlled sharing, follow-up information and clear access permissions.",
-    technology:
-      "Potential directions include structured health records, secure APIs, consent management and audit trails. A working implementation has not been confirmed.",
-    impact:
-      "The goal is to explore more consistent information sharing while respecting confidentiality, consent and professional responsibilities.",
-    next:
-      "Define a narrow patient-authorised sharing workflow, map the data permissions, develop a privacy-first prototype and review relevant health-data requirements.",
-    disclaimer:
-      "Concept stage. No live patient records, healthcare integrations or clinical outcomes are claimed."
+  const dialog = document.getElementById("project-dialog");
+  const dialogContent = document.getElementById("dialog-content");
+  const closeButton = dialog?.querySelector(".dialog-close");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  let previousFocus = null;
+
+  const escapeHTML = value =>
+    String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+
+  function sectionHTML(title, content, icon) {
+    const body = Array.isArray(content)
+      ? `<ul>${content.map(item => `<li>${escapeHTML(item)}</li>`).join("")}</ul>`
+      : `<p>${escapeHTML(content)}</p>`;
+
+    return `
+      <section class="case-section">
+        <h3><span aria-hidden="true">${icon}</span>${escapeHTML(title)}</h3>
+        ${body}
+      </section>`;
   }
-};
 
-/* ------------------------------------------------------------
-   02. SELECTORS AND SMALL UTILITIES
-   ------------------------------------------------------------ */
-
-const $ = (selector, root = document) => root.querySelector(selector);
-const $$ = (selector, root = document) =>
-  Array.from(root.querySelectorAll(selector));
-
-const prefersReducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-);
-
-function safeText(value) {
-  return String(value ?? "");
-}
-
-function escapeHTML(value) {
-  return safeText(value).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[character]);
-}
-
-function normaliseProjectId(value) {
-  return safeText(value)
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "");
-}
-
-/* ------------------------------------------------------------
-   03. YEAR
-   ------------------------------------------------------------ */
-
-function initialiseYear() {
-  const yearElement = $("#current-year");
-
-  if (yearElement) {
-    yearElement.textContent = String(new Date().getFullYear());
+  function renderWorkflow(project) {
+    return `
+      <section class="case-workflow">
+        <p class="workflow-label">HOW THE IDEA COULD WORK</p>
+        <div class="workflow-grid">
+          ${project.workflow.map((step, index) => `
+            <div class="workflow-step">
+              <div class="workflow-icon" aria-hidden="true">${["◉", "⌁", "◇", "↗"][index]}</div>
+              <strong>${String(index + 1).padStart(2, "0")} · ${escapeHTML(step[0])}</strong>
+              <span>${escapeHTML(step[1])}</span>
+            </div>
+          `).join("")}
+        </div>
+        <p class="workflow-footnote">
+          ILLUSTRATIVE WORKFLOW · NOT A CLAIM OF LIVE SYSTEM PERFORMANCE
+        </p>
+      </section>`;
   }
-}
 
-/* ------------------------------------------------------------
-   04. HEADER AND SCROLL PROGRESS
-   ------------------------------------------------------------ */
+  function renderCaseStudy(project) {
+    const sections = [
+      sectionHTML("The problem", project.problem, "⌁"),
+      sectionHTML("Who is affected", project.affected, "◎"),
+      sectionHTML("Root causes", project.causes, "⌘"),
+      sectionHTML("Existing approaches & limitations", project.existing, "⇄"),
+      sectionHTML("Why it matters", project.why, "✳"),
+      sectionHTML("The proposed idea", project.idea, "◇"),
+      sectionHTML("Expected outcomes", project.outcomes, "↗"),
+      sectionHTML("Potential advantages", project.advantages, "＋")
+    ].join("");
 
-function initialiseScrollEffects() {
-  const header = $(".site-header");
-  let progressBar = $("#scroll-progress");
+    return `
+      <article class="case-study"
+        style="--case-accent:${project.accent};--case-glow:${project.accent}22">
+        <header class="case-hero">
+          <span class="case-kicker">${escapeHTML(project.category)}</span>
+          <h2 id="dialog-title">${escapeHTML(project.title)}</h2>
+          <p class="case-subtitle">${escapeHTML(project.subtitle)}</p>
+          <span class="case-stage">${escapeHTML(project.stage)}</span>
+        </header>
 
-  if (!progressBar) {
-    progressBar = document.createElement("div");
-    progressBar.id = "scroll-progress";
-    progressBar.setAttribute("aria-hidden", "true");
+        <div class="case-body">
+          <p class="case-disclaimer">
+            Portfolio transparency: this case study separates the problem being
+            explored from the current development stage. Workflow graphics are
+            illustrative and do not represent verified outcomes or live integrations.
+          </p>
 
-    Object.assign(progressBar.style, {
-      position: "fixed",
-      zIndex: "2000",
-      top: "0",
-      left: "0",
-      width: "0%",
-      height: "2px",
-      pointerEvents: "none",
-      background: "linear-gradient(90deg, #65e5ff, #6686ff, #b69aff)",
-      boxShadow: "0 0 12px rgba(101, 229, 255, .3)"
+          ${renderWorkflow(project)}
+
+          <div class="case-section-grid">${sections}</div>
+
+          <button class="case-full-toggle" type="button" aria-expanded="false">
+            <span>Implementation, technology & next steps</span>
+            <span aria-hidden="true">＋</span>
+          </button>
+
+          <div class="case-full-details">
+            ${sectionHTML("Implementation type", project.implementation, "▣")}
+
+            <section class="case-section">
+              <h3><span aria-hidden="true">⌘</span>Technology direction</h3>
+              <p>Tools and approaches to consider, subject to implementation needs:</p>
+              <div class="case-tags">
+                ${project.tech.map(tag => `<span class="case-tag">${escapeHTML(tag)}</span>`).join("")}
+              </div>
+            </section>
+
+            ${sectionHTML("Next steps", project.next, "↗")}
+            ${sectionHTML("Current limitations", project.limitation, "!")}
+          </div>
+
+          <div class="case-next">
+            <h3>What comes next</h3>
+            <p>${escapeHTML(project.next)}</p>
+          </div>
+
+          <p class="case-limit">
+            <strong>Important limitation:</strong> ${escapeHTML(project.limitation)}
+          </p>
+
+          <div class="case-footer">
+            <span>EDDY BUILDS · PROJECT NOTE</span>
+            <span>IDEA → PROTOTYPE → EVALUATION</span>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function normaliseProjectId(value) {
+    const id = String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    const aliases = {
+      legacysenseai: "legacysense",
+      ayurqcai: "ayurqc",
+      continuityai: "continuity",
+      roadguardai: "roadguard"
+    };
+    return aliases[id] || id;
+  }
+
+  function openProject(id) {
+    const project = PROJECTS[normaliseProjectId(id)];
+    if (!project || !dialog || !dialogContent) return;
+
+    previousFocus = document.activeElement;
+    dialogContent.innerHTML = renderCaseStudy(project);
+
+    if (typeof dialog.showModal === "function") {
+      dialog.showModal();
+    } else {
+      dialog.setAttribute("open", "");
+    }
+
+    document.body.classList.add("modal-open");
+    closeButton?.focus({ preventScroll: true });
+  }
+
+  function closeProject() {
+    if (!dialog) return;
+
+    if (typeof dialog.close === "function" && dialog.open) {
+      dialog.close();
+    } else {
+      dialog.removeAttribute("open");
+    }
+
+    document.body.classList.remove("modal-open");
+
+    if (previousFocus && typeof previousFocus.focus === "function") {
+      previousFocus.focus({ preventScroll: true });
+    }
+  }
+
+  // Project cards: mouse, keyboard and touch-friendly click behaviour.
+  document.querySelectorAll(
+    ".project-card, .exploration-card, [data-open-project]"
+  ).forEach(card => {
+    const id = normaliseProjectId(
+      card.dataset.project || card.dataset.openProject
+    );
+
+    if (!PROJECTS[id]) return;
+
+    card.addEventListener("click", event => {
+      if (event.target.closest("a, button")) return;
+      openProject(id);
     });
 
-    document.body.appendChild(progressBar);
-  }
+    card.addEventListener("keydown", event => {
+      if (
+        (event.key === "Enter" || event.key === " ") &&
+        event.target === card
+      ) {
+        event.preventDefault();
+        openProject(id);
+      }
+    });
+  });
 
-  let ticking = false;
+  closeButton?.addEventListener("click", closeProject);
 
-  function updateScrollState() {
-    const scrollTop =
-      window.scrollY || document.documentElement.scrollTop;
-
-    const scrollableHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-
-    const progress = scrollableHeight > 0
-      ? Math.min(100, Math.max(0, (scrollTop / scrollableHeight) * 100))
-      : 0;
-
-    progressBar.style.width = `${progress}%`;
-
-    if (header) {
-      header.classList.toggle("is-scrolled", scrollTop > 20);
+  dialog?.addEventListener("click", event => {
+    if (event.target === dialog) {
+      closeProject();
+      return;
     }
 
-    ticking = false;
-  }
+    const toggle = event.target.closest(".case-full-toggle");
+    if (!toggle) return;
 
-  function requestUpdate() {
-    if (!ticking) {
-      ticking = true;
-      window.requestAnimationFrame(updateScrollState);
-    }
-  }
+    const details = toggle.nextElementSibling;
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
 
-  window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate, { passive: true });
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    toggle.firstElementChild.textContent = expanded
+      ? "Implementation, technology & next steps"
+      : "Hide implementation details";
+    toggle.lastElementChild.textContent = expanded ? "＋" : "−";
+    details?.classList.toggle("is-open", !expanded);
+  });
 
-  updateScrollState();
-}
-
-/* ------------------------------------------------------------
-   05. MOBILE NAVIGATION
-   Supports buttons with .menu-toggle and links in .nav-links.
-   ------------------------------------------------------------ */
-
-function initialiseNavigation() {
-  const menuButton = $(".menu-toggle");
-  const navLinks = $(".nav-links");
-
-  if (!menuButton || !navLinks) return;
-
-  function closeMenu() {
-    navLinks.classList.remove("is-open");
-    menuButton.setAttribute("aria-expanded", "false");
-  }
-
-  function toggleMenu() {
-    const isOpen = navLinks.classList.toggle("is-open");
-    menuButton.setAttribute("aria-expanded", String(isOpen));
-  }
-
-  menuButton.setAttribute("aria-expanded", "false");
-  menuButton.setAttribute("aria-label", "Toggle navigation");
-
-  menuButton.addEventListener("click", toggleMenu);
-
-  $$("a", navLinks).forEach(link => {
-    link.addEventListener("click", closeMenu);
+  dialog?.addEventListener("close", () => {
+    document.body.classList.remove("modal-open");
   });
 
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeMenu();
-  });
-
-  document.addEventListener("click", event => {
-    if (
-      navLinks.classList.contains("is-open") &&
-      !navLinks.contains(event.target) &&
-      !menuButton.contains(event.target)
-    ) {
-      closeMenu();
+    if (event.key === "Escape" && dialog?.open) {
+      closeProject();
     }
   });
 
-  const sections = $$("main section[id]");
+  // Mobile navigation.
+  menuToggle?.addEventListener("click", () => {
+    const expanded = menuToggle.getAttribute("aria-expanded") === "true";
 
-  if ("IntersectionObserver" in window && sections.length) {
+    menuToggle.setAttribute("aria-expanded", String(!expanded));
+    menuToggle.setAttribute(
+      "aria-label",
+      expanded ? "Open navigation" : "Close navigation"
+    );
+    navLinks?.classList.toggle("is-open", !expanded);
+  });
+
+  navLinks?.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("is-open");
+      menuToggle?.setAttribute("aria-expanded", "false");
+      menuToggle?.setAttribute("aria-label", "Open navigation");
+    });
+  });
+
+  // Automatically update the footer year.
+  const year = document.getElementById("current-year");
+  if (year) year.textContent = new Date().getFullYear();
+
+  // Lightweight scroll progress indicator.
+  const progress = document.getElementById("scroll-progress");
+  let scrollQueued = false;
+
+  function updateProgress() {
+    if (!progress) return;
+
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const percentage = total > 0 ? (window.scrollY / total) * 100 : 0;
+
+    progress.style.width = `${Math.min(100, Math.max(0, percentage))}%`;
+    scrollQueued = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (scrollQueued) return;
+    scrollQueued = true;
+    window.requestAnimationFrame(updateProgress);
+  }, { passive: true });
+
+  updateProgress();
+
+  // Reveal content as it enters the viewport.
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const revealItems = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-
-        const sectionId = entry.target.id;
-
-        $$(".nav-links a[href^='#']").forEach(link => {
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.setAttribute("aria-current", "location");
-          } else {
-            link.removeAttribute("aria-current");
-          }
-        });
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
       });
     }, {
-      rootMargin: "-25% 0px -60% 0px",
-      threshold: 0
+      threshold: 0.12,
+      rootMargin: "0px 0px -35px 0px"
     });
 
-    sections.forEach(section => observer.observe(section));
-  }
-}
-
-/* ------------------------------------------------------------
-   06. SCROLL REVEALS
-   ------------------------------------------------------------ */
-
-function initialiseRevealAnimations() {
-  const elements = $$(".reveal");
-
-  if (!elements.length) return;
-
-  if (prefersReducedMotion.matches ||
-      !("IntersectionObserver" in window)) {
-    elements.forEach(element => {
-      element.classList.add("is-visible");
-    });
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries, activeObserver) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-
-      entry.target.classList.add("is-visible");
-      activeObserver.unobserve(entry.target);
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: "0px 0px -35px 0px"
-  });
-
-  elements.forEach((element, index) => {
-    if (!element.hasAttribute("data-reveal-delay")) {
-      const delay = Math.min(index % 4, 3) * 70;
-      element.style.transitionDelay = `${delay}ms`;
-    }
-
-    observer.observe(element);
-  });
-}
-
-/* ------------------------------------------------------------
-   07. PROJECT DIALOG
-   Creates the case-study dialog using safe, escaped text.
-   ------------------------------------------------------------ */
-
-let projectDialog = null;
-let lastFocusedElement = null;
-
-function createProjectDialog() {
-  if (projectDialog) return projectDialog;
-
-  projectDialog = document.createElement("dialog");
-  projectDialog.className = "project-dialog";
-  projectDialog.setAttribute("aria-label", "Project case study");
-
-  projectDialog.innerHTML = `
-    <div class="dialog-inner">
-      <div class="dialog-topbar">
-        <div class="dialog-brand">
-          EDDY BUILDS <span>/ PROJECT FILE</span>
-        </div>
-        <button
-          class="dialog-close"
-          type="button"
-          aria-label="Close project details"
-        >&#10005;</button>
-      </div>
-
-      <div class="dialog-art" aria-hidden="true">
-        <span class="dialog-symbol">EB</span>
-      </div>
-
-      <div class="dialog-content">
-        <div class="dialog-meta">
-          <span class="dialog-number">PROJECT 01</span>
-          <span class="project-status dialog-status">PROJECT STATUS</span>
-        </div>
-
-        <h2 class="dialog-title">Project title</h2>
-        <p class="dialog-tagline"></p>
-        <p class="dialog-description"></p>
-
-        <div class="dialog-section">
-          <span class="detail-label">THE PROBLEM</span>
-          <p class="dialog-problem"></p>
-        </div>
-
-        <div class="dialog-section">
-          <span class="detail-label">PROPOSED APPROACH</span>
-          <p class="dialog-approach"></p>
-        </div>
-
-        <div class="dialog-section">
-          <span class="detail-label">TECHNOLOGY / DIRECTION</span>
-          <p class="dialog-technology"></p>
-        </div>
-
-        <div class="dialog-section">
-          <span class="detail-label">INTENDED IMPACT</span>
-          <p class="dialog-impact"></p>
-        </div>
-
-        <div class="dialog-section">
-          <span class="detail-label">NEXT MILESTONE</span>
-          <p class="dialog-next"></p>
-        </div>
-
-        <p class="dialog-disclaimer"></p>
-
-        <div class="dialog-actions">
-          <button class="button button-primary dialog-done" type="button">
-            Back to portfolio <span aria-hidden="true">&#8594;</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(projectDialog);
-
-  $(".dialog-close", projectDialog).addEventListener("click", closeProjectDialog);
-  $(".dialog-done", projectDialog).addEventListener("click", closeProjectDialog);
-
-  projectDialog.addEventListener("click", event => {
-    if (event.target === projectDialog) {
-      closeProjectDialog();
-    }
-  });
-
-  projectDialog.addEventListener("close", () => {
-    document.body.classList.remove("dialog-open");
-
-    if (lastFocusedElement && document.contains(lastFocusedElement)) {
-      lastFocusedElement.focus({ preventScroll: true });
-    }
-  });
-
-  projectDialog.addEventListener("cancel", () => {
-    document.body.classList.remove("dialog-open");
-  });
-
-  return projectDialog;
-}
-
-function openProjectDialog(projectId, triggerElement) {
-  const id = normaliseProjectId(projectId);
-  const project = PROJECTS[id];
-
-  if (!project) {
-    console.warn(`EDDY BUILDS: Unknown project "${projectId}".`);
-    return;
-  }
-
-  const dialog = createProjectDialog();
-
-  lastFocusedElement = triggerElement || document.activeElement;
-
-  dialog.style.setProperty("--dialog-accent", project.accent);
-  dialog.style.setProperty("--dialog-accent-rgb", project.accentRgb);
-
-  const art = $(".dialog-art", dialog);
-  art.style.setProperty("--dialog-accent", project.accent);
-  art.style.setProperty("--dialog-accent-rgb", project.accentRgb);
-
-  $(".dialog-symbol", dialog).textContent = project.symbol;
-  $(".dialog-number", dialog).textContent = `PROJECT ${project.number}`;
-  $(".dialog-title", dialog).textContent = project.name;
-  $(".dialog-tagline", dialog).textContent = project.tagline;
-  $(".dialog-description", dialog).textContent = project.description;
-
-  $(".dialog-problem", dialog).textContent = project.problem;
-  $(".dialog-approach", dialog).textContent = project.approach;
-  $(".dialog-technology", dialog).textContent = project.technology;
-  $(".dialog-impact", dialog).textContent = project.impact;
-  $(".dialog-next", dialog).textContent = project.next;
-  $(".dialog-disclaimer", dialog).textContent = project.disclaimer;
-
-  const status = $(".dialog-status", dialog);
-  status.textContent = project.status;
-  status.className = `project-status dialog-status ${project.statusType}`;
-
-  if (typeof dialog.showModal === "function") {
-    if (!dialog.open) dialog.showModal();
+    revealItems.forEach(item => observer.observe(item));
   } else {
-    // Basic fallback for browsers without native dialog support.
-    dialog.setAttribute("open", "");
+    revealItems.forEach(item => item.classList.add("is-visible"));
   }
-
-  document.body.classList.add("dialog-open");
-
-  const closeButton = $(".dialog-close", dialog);
-  if (closeButton) closeButton.focus({ preventScroll: true });
-}
-
-function closeProjectDialog() {
-  if (!projectDialog) return;
-
-  if (typeof projectDialog.close === "function" && projectDialog.open) {
-    projectDialog.close();
-  } else {
-    projectDialog.removeAttribute("open");
-    document.body.classList.remove("dialog-open");
-
-    if (lastFocusedElement && document.contains(lastFocusedElement)) {
-      lastFocusedElement.focus({ preventScroll: true });
-    }
-  }
-}
-
-/* ------------------------------------------------------------
-   08. MAKE PROJECT CARDS INTERACTIVE
-   Supported identifiers include:
-   data-project="legacysense"
-   data-project="ayurqc"
-   or recognised project-card class names.
-   ------------------------------------------------------------ */
-
-function getProjectIdFromElement(element) {
-  if (!element) return null;
-
-  const directId = element.dataset.project;
-
-  if (directId && PROJECTS[normaliseProjectId(directId)]) {
-    return normaliseProjectId(directId);
-  }
-
-  const classMappings = {
-    "project-legacy": "legacysense",
-    "project-arogya": "arogyaedge",
-    "project-roadguard": "roadguard",
-    "project-fixtrack": "fixtrack",
-    "exploration-ayurqc": "ayurqc",
-    "exploration-unicampus": "unicampus",
-    "exploration-continuity": "continuity"
-  };
-
-  for (const [className, projectId] of Object.entries(classMappings)) {
-    if (element.classList.contains(className)) return projectId;
-  }
-
-  return null;
-}
-
-function initialiseProjectCards() {
-  const possibleCards = $$(".project-card, .exploration-card, [data-project]");
-
-  possibleCards.forEach(card => {
-    const projectId = getProjectIdFromElement(card);
-    if (!projectId) return;
-
-    card.dataset.project = projectId;
-
-    // Preserve ordinary links and buttons inside a project card.
-    card.addEventListener("click", event => {
-      if (event.target.closest("a, button")) return;
-      openProjectDialog(projectId, card);
-    });
-
-    // Allow a whole card to be opened by keyboard.
-    if (!card.matches("a, button, [tabindex]")) {
-      card.setAttribute("tabindex", "0");
-    }
-
-    if (!card.hasAttribute("role")) {
-      card.setAttribute("role", "button");
-    }
-
-    if (!card.hasAttribute("aria-label")) {
-      const project = PROJECTS[projectId];
-      card.setAttribute("aria-label", `View ${project.name} case study`);
-    }
-
-    card.addEventListener("keydown", event => {
-      if (event.target !== card) return;
-
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openProjectDialog(projectId, card);
-      }
-    });
-  });
-
-  // Explicit buttons or links can use data-open-project="ayurqc".
-  $$("[data-open-project]").forEach(control => {
-    control.addEventListener("click", event => {
-      const projectId = normaliseProjectId(control.dataset.openProject);
-      if (!PROJECTS[projectId]) return;
-
-      // Avoid following a placeholder link when opening a case study.
-      if (control.tagName === "A" &&
-          (!control.getAttribute("href") ||
-           control.getAttribute("href") === "#")) {
-        event.preventDefault();
-      }
-
-      openProjectDialog(projectId, control);
-    });
-  });
-}
-
-/* ------------------------------------------------------------
-   09. SUBTLE POINTER EFFECT
-   Desktop only. Avoids moving elements on touch screens.
-   ------------------------------------------------------------ */
-
-function initialisePointerEffects() {
-  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
-
-  if (!canHover.matches || prefersReducedMotion.matches) return;
-
-  $$(".project-card").forEach(card => {
-    const art = $(".project-art", card);
-    if (!art) return;
-
-    card.addEventListener("pointermove", event => {
-      const rect = card.getBoundingClientRect();
-
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-
-      art.style.setProperty("--pointer-x", `${x * 12}px`);
-      art.style.setProperty("--pointer-y", `${y * 8}px`);
-    });
-
-    card.addEventListener("pointerleave", () => {
-      art.style.removeProperty("--pointer-x");
-      art.style.removeProperty("--pointer-y");
-    });
-  });
-}
-
-/* ------------------------------------------------------------
-   10. SMOOTH IN-PAGE NAVIGATION
-   Respects the operating system's reduced-motion setting.
-   ------------------------------------------------------------ */
-
-function initialiseSmoothNavigation() {
-  $$('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", event => {
-      const href = link.getAttribute("href");
-
-      if (!href || href === "#") return;
-
-      let target;
-
-      try {
-        target = document.querySelector(href);
-      } catch {
-        return;
-      }
-
-      if (!target) return;
-
-      event.preventDefault();
-
-      target.scrollIntoView({
-        behavior: prefersReducedMotion.matches ? "auto" : "smooth",
-        block: "start"
-      });
-
-      if (window.location.hash !== href) {
-        history.replaceState(null, "", href);
-      }
-    });
-  });
-}
-
-/* ------------------------------------------------------------
-   11. GLOBAL KEYBOARD SUPPORT
-   ------------------------------------------------------------ */
-
-function initialiseKeyboardSupport() {
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && projectDialog?.open) {
-      closeProjectDialog();
-    }
-  });
-}
-
-/* ------------------------------------------------------------
-   12. START APPLICATION
-   ------------------------------------------------------------ */
-
-function initialisePortfolio() {
-  initialiseYear();
-  initialiseScrollEffects();
-  initialiseNavigation();
-  initialiseRevealAnimations();
-  initialiseProjectCards();
-  initialisePointerEffects();
-  initialiseSmoothNavigation();
-  initialiseKeyboardSupport();
 
   console.info(
-    "EDDY BUILDS portfolio engine initialised.",
-    `${Object.keys(PROJECTS).length} project case studies available.`
+    `EDDY BUILDS ready — ${Object.keys(PROJECTS).length} project case studies registered.`
   );
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initialisePortfolio, {
-    once: true
-  });
-} else {
-  initialisePortfolio();
-}
+})();
