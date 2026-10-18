@@ -1,131 +1,98 @@
-<div align="center">
+# EDDY BUILDS — Personal Portfolio
 
-# EDDY BUILDS
+> Ideas are everywhere. I build what's next.
 
-### Learn. Build. Improve. Repeat.
-
-**A personal portfolio exploring AI, software development, and human-centred innovation.**
-
-[Live Portfolio](https://eddy0see.github.io/eddy-builds-portfolio/) · [GitHub Repository](https://github.com/EDDY0See/eddy-builds-portfolio)
-
-</div>
-
----
+Welcome to **EDDY BUILDS**, my personal portfolio showcasing my journey as a B.Tech Artificial Intelligence and Machine Learning student, my software experiments, and my ideas for solving real-world problems through technology.
 
 ## About Me
 
-I'm **Edwin Vinod**, a B.Tech Artificial Intelligence and Machine Learning student interested in building technology-driven solutions to real-world problems.
+I'm an AI & ML student interested in artificial intelligence, software development, and human-centred innovation.
 
-EDDY BUILDS documents my learning journey through software projects, AI/ML concepts, interface design, academic development, and experimentation. Rather than presenting every idea as a finished product, I aim to show what each project is trying to solve, its current development stage, and the opportunities for improvement.
-
-My approach is simple: understand a problem, explore a solution, build thoughtfully, test what is possible, and keep improving.
+I use projects to learn by building, explore practical problems, and develop my technical and problem-solving skills.
 
 ## Featured Projects
 
-### 01 · LegacySense AI
-**Industrial Energy Intelligence**
+### 1. LegacySense AI
+**Area:** Industrial AI and energy intelligence  
+**Status:** Concept and UI/dashboard mockup
 
-An energy-intelligence concept focused on legacy SME manufacturing environments.
+An exploration of how energy-related insights could be presented to users working with legacy industrial environments.
 
-- **Current stage:** Presentation and UI/dashboard mockup
-- **Explores:** Industrial energy data, analytics, and decision-support interfaces
-- **Next direction:** Develop and evaluate a prototype using suitable data
+### 2. ArogyaEdge
+**Area:** Healthcare AI  
+**Status:** Concept
 
-### 02 · ArogyaEdge
-**Offline-First Clinical Assistance Concept**
+An offline-first clinical assistance concept intended for resource-limited healthcare environments. Clinical outputs would require appropriate validation and professional oversight.
 
-A concept exploring privacy-conscious, offline-first clinical assistance for resource-limited healthcare environments.
+### 3. RoadGuard AI
+**Area:** Road safety and AI  
+**Status:** Prototype in development
 
-- **Current stage:** Concept
-- **Explores:** Local AI, clinical documentation workflows, and safety-oriented assistance
-- **Next direction:** Define requirements, develop a prototype, and evaluate it with appropriate safeguards
+A road-safety project exploring how technology could help identify and communicate potential risks.
 
-### 03 · RoadGuard AI
-**Road Safety Technology**
+### 4. FixTrack
+**Area:** Campus software development  
+**Status:** In development
 
-A road-safety AI prototype intended to explore technology-assisted road-safety workflows.
+A complaint-tracking system concept for recording campus issues and following their resolution.
 
-- **Current stage:** Prototype development
-- **Explores:** AI-assisted road-safety problem-solving
-- **Next direction:** Improve the prototype, test its behaviour, and document limitations
+## Exploratory Ideas
 
-### 04 · FixTrack
-**Academic Complaint Tracking**
+### 5. AyurQC AI
+**Area:** AI-assisted quality screening  
+**Status:** Idea stage
 
-An academic software project designed to organise and track college complaints.
+Explores the possibility of using AI-assisted screening to flag unusual raw-material samples for further investigation. It is not a substitute for laboratory testing or expert assessment.
 
-- **Current stage:** Academic project in development
-- **Explores:** Java, XAMPP, database-backed records, and complaint status workflows
-- **Next direction:** Improve data consistency, status updates, and usability
+### 6. UniCampus
+**Area:** Education technology  
+**Status:** Platform concept
 
-## Additional Explorations
+A unified campus platform concept connecting academic workflows, student information, and support services.
 
-### 05 · AyurQC AI
-An AI-assisted screening concept for identifying unusual Ayurvedic raw-material batches that may warrant further investigation.
+### 7. Continuity AI
+**Area:** Healthcare technology  
+**Status:** Concept
 
-**Current stage:** Idea/concept.
+Explores ways to improve continuity of care and authorised access to relevant patient information.
 
-AI screening alone cannot establish authenticity, purity, adulteration, or medicinal safety. Laboratory testing and qualified human assessment remain essential.
+## Website Features
 
-### 06 · UniCampus
-A concept for a unified campus platform exploring academic information, attendance workflows, resources, and communication.
+- Dark visual theme with gradient accents
+- Responsive portfolio layout
+- Featured project cards
+- Interactive project case studies
+- Animated visual elements
+- Contact section with email link
+- Dedicated sections for projects, explorations, and background
 
-**Current stage:** Platform concept.
+## Built With
 
-### 07 · Continuity AI
-A healthcare information-continuity concept focused on helping authorised people access relevant patient information across care transitions.
+- HTML5
+- CSS3
+- JavaScript
+- Git and GitHub
 
-**Current stage:** Concept.
+## Run Locally
 
-Privacy, consent, access control, and appropriate handling of health information are important design considerations.
+1. Clone or download this repository.
+2. Open the project folder in VS Code.
+3. Open `index.html` in a web browser.
 
-## Technology & Areas of Interest
+The main files are:
 
-My learning and project interests include:
+- `index.html` — portfolio content and structure
+- `style.css` — visual design, responsive styling, and animations
+- `script.js` — interactive project details and navigation
 
-- Artificial Intelligence and Machine Learning
-- Python and Java programming
-- HTML, CSS, and JavaScript
-- Database systems and application workflows
-- Interactive interfaces and UI/UX design
-- Responsible AI and human-centred problem-solving
-
-Technologies and implementation details differ between projects. A technology listed as an area of interest is not a claim that every project uses it.
-
-## How I Build
-
-**01 — Understand:** Identify the problem and the people affected.
-
-**02 — Explore:** Research possible approaches and define practical requirements.
-
-**03 — Build:** Develop an interface, prototype, or implementation appropriate to the project's stage.
-
-**04 — Test:** Check behaviour, identify limitations, and improve reliability.
-
-**05 — Document:** Explain the decisions, current status, and next steps honestly.
-
-## What This Portfolio Represents
-
-EDDY BUILDS is a record of ongoing learning and experimentation—not a claim that every concept is production-ready.
-
-Project descriptions distinguish concepts, mockups, prototypes, and development work. Proposed capabilities and future plans are not presented as validated outcomes.
-
-I value continuous learning, thoughtful design, technical improvement, and transparent communication about what has and has not been implemented.
-
-## Explore the Portfolio
-
-Visit the live website to explore the projects and their individual case-study popups.
-
-**Live website:** https://eddy0see.github.io/eddy-builds-portfolio/
-
-**Source repository:** https://github.com/EDDY0See/eddy-builds-portfolio
-
----
-
-<div align="center">
+## Contact
 
 **EDDY BUILDS**
 
-*Ideas are the beginning. Building and improving make the difference.*
+Email: [eddymaliyeckal@gmail.com](mailto:eddymaliyeckal@gmail.com)
 
-</div>
+I'm open to constructive feedback, learning opportunities, and collaboration.
+
+---
+
+*Built with curiosity, care, and continuous learning.*
